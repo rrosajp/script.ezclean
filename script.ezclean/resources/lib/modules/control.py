@@ -42,7 +42,7 @@ skinPath = xbmc.translatePath('special://skin/')
 addonPath = xbmc.translatePath(addonInfo('path'))
 AddonID = 'script.ezclean'
 artPath = xbmc.translatePath(os.path.join('special://home/addons/' + AddonID, 'art'))
-backupdir = xbmc.translatePath(os.path.join('special://home/backupdir',''))   
+backupdir = xbmc.translatePath(os.path.join('special://home/backupdir',''))
 packagesdir = xbmc.translatePath(os.path.join('special://home/addons/packages',''))
 USERDATA = xbmc.translatePath(os.path.join('special://home/userdata',''))
 ADDON_DATA = xbmc.translatePath(os.path.join(USERDATA, 'addon_data'))
@@ -98,10 +98,17 @@ def openSettings(query=None, id=addonInfo('id')):
         execute('Addon.OpenSettings(%s)' % id)
         if query == None: raise Exception()
         c, f = query.split('.')
-        execute('SetFocus(%i)' % (int(c) + 100))
-        execute('SetFocus(%i)' % (int(f) + 200))
+        if int(getKodiVersion()) >= 18:
+            execute('SetFocus(%i)' % (int(c) - 100))
+            execute('SetFocus(%i)' % (int(f) - 80))
+        else:
+            execute('SetFocus(%i)' % (int(c) + 100))
+            execute('SetFocus(%i)' % (int(f) + 200))
     except:
         return
+
+def getKodiVersion():
+    return xbmc.getInfoLabel("System.BuildVersion").split(".")[0]
 
 def getCurrentViewId():
     win = xbmcgui.Window(xbmcgui.getCurrentWindowId())
@@ -111,10 +118,14 @@ def refresh():
     return execute('Container.Refresh')
 
 def busy():
-    return execute('ActivateWindow(busydialog)')
+    if int(getKodiVersion()) >= 18: return execute('ActivateWindow(busydialognocancel)')
+    else:
+        return execute('ActivateWindow(busydialog)')
 
 def idle():
-    return execute('Dialog.Close(busydialog)')
+    if int(getKodiVersion()) >= 18: return execute('Dialog.Close(busydialognocancel)')
+    else:
+        return execute('Dialog.Close(busydialog)')
 
 def queueItem():
     return execute('Action(Queue)')

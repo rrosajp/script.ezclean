@@ -16,7 +16,7 @@ backupzip = control.setting("remote_backup")
 USB = xbmc.translatePath(os.path.join(backupzip))
 ADDON_FANART = control.addonFanart()
 ADDON_ICON = control.addonIcon()
-backupdir = xbmc.translatePath(os.path.join('special://home/backupdir',''))   
+backupdir = xbmc.translatePath(os.path.join('special://home/backupdir',''))
 packagesdir = xbmc.translatePath(os.path.join('special://home/addons/packages',''))
 USERDATA = xbmc.translatePath(os.path.join('special://home/userdata',''))
 ADDON_DATA = xbmc.translatePath(os.path.join(USERDATA,'addon_data'))
@@ -30,62 +30,64 @@ EXCLUDES = [AddonID, 'backupdir','backup.zip','script.module.requests','script.m
 EXCLUDES_ADDONS = ['notification','packages']
 
 def SETTINGS():
-	xbmcaddon.Addon(id=AddonID).openSettings()
+    xbmcaddon.Addon(id=AddonID).openSettings()
 
 def ENABLE_WIZARD():
-	try:
-		query = '{"jsonrpc":"2.0", "method":"Addons.SetAddonEnabled","params":{"addonid":"%s","enabled":true}, "id":1}' % (AddonID)
-		xbmc.executeJSONRPC(query)
-	except:
-		pass	
+    try:
+        query = '{"jsonrpc":"2.0", "method":"Addons.SetAddonEnabled","params":{"addonid":"%s","enabled":true}, "id":1}' % (AddonID)
+        xbmc.executeJSONRPC(query)
+    except:
+        pass
 
 def CATEGORIES():
-	CreateDir('[COLOR white][B]MAINTENANCE[/B][/COLOR]','ur', 'maintenance', ADDON_ICON,ADDON_FANART,'', isFolder=True)
-	CreateDir('[COLOR white][B]LOG VIEWER/UPLOADER[/B][/COLOR]','ur', 'log_tools', ADDON_ICON,ADDON_FANART,'')
-	CreateDir('[COLOR white][B]TOOLS[/B][/COLOR]','ur','tools',ADDON_ICON,ADDON_FANART,'', isFolder=True)
-	CreateDir('[COLOR white][B]SETTINGS[/B][/COLOR]','ur','settings',ADDON_ICON,ADDON_FANART,'')	
+    CreateDir('[COLOR white][B]MAINTENANCE[/B][/COLOR]','ur', 'maintenance', ADDON_ICON,ADDON_FANART,'', isFolder=True)
+    CreateDir('[COLOR white][B]LOG VIEWER/UPLOADER[/B][/COLOR]','ur', 'log_tools', ADDON_ICON,ADDON_FANART,'')
+    CreateDir('[COLOR white][B]TOOLS[/B][/COLOR]','ur','tools',ADDON_ICON,ADDON_FANART,'', isFolder=True)
+    CreateDir('[COLOR white][B]SETTINGS[/B][/COLOR]','ur','settings',ADDON_ICON,ADDON_FANART,'')
+    CreateDir('[COLOR white][B]SHOW CHANGELOG[/B][/COLOR]','ur','changeLog',ADDON_ICON,ADDON_FANART,'')
 
 def CAT_TOOLS():
-	CreateDir('[COLOR white][B]ADVANCED SETTINGS (BUFFER SIZE)[/B][/COLOR]','ur', 'adv_settings', ADDON_ICON,ADDON_FANART,'')
-	CreateDir('[COLOR white][B]FORCE UPDATES[/B][/COLOR]','ur', 'forceUpdate', ADDON_ICON,ADDON_FANART,'')
-	CreateDir('[COLOR white][B]BACKUP/RESTORE[/B][/COLOR]','ur','backup_restore',ADDON_ICON,ADDON_FANART,'')
-	CreateDir('[COLOR white][B]BUILDS/WIZARD[/B][/COLOR]','ur','builds',ADDON_ICON,ADDON_FANART,'', isFolder=True)
-	CreateDir('[COLOR red][B]FRESH START[/B][/COLOR]','url','fresh_start',ADDON_ICON,ADDON_FANART,'')
+    CreateDir('[COLOR white][B]ADVANCED SETTINGS (BUFFER SIZE)[/B][/COLOR]','ur', 'adv_settings', ADDON_ICON,ADDON_FANART,'')
+    CreateDir('[COLOR white][B]FORCE UPDATES[/B][/COLOR]','ur', 'forceUpdate', ADDON_ICON,ADDON_FANART,'')
+    CreateDir('[COLOR white][B]BACKUP/RESTORE[/B][/COLOR]','ur','backup_restore',ADDON_ICON,ADDON_FANART,'')
+    CreateDir('[COLOR white][B]BUILDS/WIZARD[/B][/COLOR]','ur','builds',ADDON_ICON,ADDON_FANART,'', isFolder=True)
+    CreateDir('[COLOR red][B]FRESH START[/B][/COLOR]','url','fresh_start',ADDON_ICON,ADDON_FANART,'')
 
 def MAINTENANCE():
-	CreateDir('[COLOR white][B]Clear Cache[/B][/COLOR]','url','clear_cache',ADDON_ICON,ADDON_FANART,'')	
-	CreateDir('[COLOR white][B]Clear Packages[/B][/COLOR]','url','clear_packages',ADDON_ICON,ADDON_FANART,'')	
-	CreateDir('[COLOR white][B]Clear Thumbnails[/B][/COLOR]','url','clear_thumbs',ADDON_ICON,ADDON_FANART,'')	
+    CreateDir('[COLOR white][B]Clear Cache[/B][/COLOR]','url','clear_cache',ADDON_ICON,ADDON_FANART,'')
+    CreateDir('[COLOR white][B]Clear Packages[/B][/COLOR]','url','clear_packages',ADDON_ICON,ADDON_FANART,'')
+    CreateDir('[COLOR white][B]Clear Thumbnails[/B][/COLOR]','url','clear_thumbs',ADDON_ICON,ADDON_FANART,'')
 
 def OPEN_URL(url):
     r = requests.get(url).content
     return r
 
 def BUILDS():
-	if wizard1!='false':
-		try:
-			name   = unicode(control.setting('name1'))
-			url    = unicode(control.setting('url1'))
-			img    = unicode(control.setting('img1'))
-			fanart = unicode(control.setting('img1'))
-			CreateDir('[COLOR lime][B][Wizard][/B][/COLOR] ' + name, url, 'install_build' , img, fanart, 'My custom Build', isFolder=False)
-		except: pass
-	if wizard2!='false':
-		try:
-			name=unicode(selfAddon.getSetting('name2'))
-			url=unicode(selfAddon.getSetting('url2'))
-			img=unicode(selfAddon.getSetting('img2'))
-			fanart=unicode(selfAddon.getSetting('img2'))
-			CreateDir('[COLOR skyblue][B][Wizard][/B][/COLOR] ' +name, url, 'install_build' , img, fanart, 'My custom Build', isFolder=False)
-		except: pass		
-	if wizard3!='false':
-		try:
-			name=unicode(selfAddon.getSetting('name3'))
-			url=unicode(selfAddon.getSetting('url3'))
-			img=unicode(selfAddon.getSetting('img3'))
-			fanart=unicode(selfAddon.getSetting('img3'))
-			CreateDir('[COLOR cyan][B][Wizard][/B][/COLOR] ' +name, url, 'install_build' , img, fanart, 'My custom Build', isFolder=False)
-		except: pass
+    if wizard1 != 'false':
+        try:
+            name = unicode(control.setting('name1'))
+            url = unicode(control.setting('url1'))
+            img = unicode(control.setting('img1'))
+            fanart = unicode(control.setting('img1'))
+            CreateDir('[COLOR lime][B][Wizard][/B][/COLOR] ' + name, url, 'install_build' , img, fanart, 'My custom Build', isFolder=False)
+        except: pass
+    if wizard2 != 'false':
+        try:
+            name = unicode(selfAddon.getSetting('name2'))
+            url = unicode(selfAddon.getSetting('url2'))
+            img = unicode(selfAddon.getSetting('img2'))
+            fanart = unicode(selfAddon.getSetting('img2'))
+            CreateDir('[COLOR skyblue][B][Wizard][/B][/COLOR] ' +name, url, 'install_build' , img, fanart, 'My custom Build', isFolder=False)
+        except: pass
+    if wizard3 != 'false':
+        try:
+            name = unicode(selfAddon.getSetting('name3'))
+            url = unicode(selfAddon.getSetting('url3'))
+            img = unicode(selfAddon.getSetting('img3'))
+            fanart = unicode(selfAddon.getSetting('img3'))
+            CreateDir('[COLOR cyan][B][Wizard][/B][/COLOR] ' +name, url, 'install_build' , img, fanart, 'My custom Build', isFolder=False)
+        except: pass
+    CreateDir('[COLOR white][B]WIZARD SETTINGS[/B][/COLOR]','ur','wizSettings',ADDON_ICON,ADDON_FANART,'')
 
 def FRESHSTART(mode='verbose'):
     if mode != 'silent': select = xbmcgui.Dialog().yesno("EZ Clean", 'Are you absolutely certain you want to wipe this install?', '', 'All addons EXCLUDING THIS WIZARD will be completely wiped!', yeslabel='Yes',nolabel='No')
@@ -115,9 +117,9 @@ def FRESHSTART(mode='verbose'):
     # RESTOREFAV()
     # ENABLE_WIZARD()
     if mode != 'silent': dialog.ok(AddonTitle,'Wipe Successful, The interface will now be reset...','','')
-    # xbmc.executebuiltin('Mastermode')		
-    if mode != 'silent': xbmc.executebuiltin('LoadProfile(Master user)')	   
-    # xbmc.executebuiltin('Mastermode') 
+    # xbmc.executebuiltin('Mastermode')
+    if mode != 'silent': xbmc.executebuiltin('LoadProfile(Master user)')
+    # xbmc.executebuiltin('Mastermode')
 
 def REMOVE_EMPTY_FOLDERS():
 #initialize the counters
@@ -125,29 +127,29 @@ def REMOVE_EMPTY_FOLDERS():
     empty_count = 0
     used_count = 0
     for curdir, subdirs, files in os.walk(HOME):
-		try:
-			if len(subdirs) == 0 and len(files) == 0: #check for empty directories. len(files) == 0 may be overkill
-				empty_count += 1 #increment empty_count
-				os.rmdir(curdir) #delete the directory
-				print "successfully removed: "+curdir
-			elif len(subdirs) > 0 and len(files) > 0: #check for used directories
-				used_count += 1 #increment used_count
-		except:pass
+        try:
+            if len(subdirs) == 0 and len(files) == 0: #check for empty directories. len(files) == 0 may be overkill
+                empty_count += 1 #increment empty_count
+                os.rmdir(curdir) #delete the directory
+                print "successfully removed: "+curdir
+            elif len(subdirs) > 0 and len(files) > 0: #check for used directories
+                used_count += 1 #increment used_count
+        except:pass
 
 def killxbmc():
-		dialog.ok("PROCESS COMPLETE", 'The skin will now be reset', 'To start using your new setup please switch the skin System > Appearance > Skin to the desired one... if images are not showing, just restart Kodi', 'Click OK to Continue')
-		# xbmc.executebuiltin('Mastermode')		
-		xbmc.executebuiltin('LoadProfile(Master user)')	   
-		# xbmc.executebuiltin('Mastermode')
+        dialog.ok("PROCESS COMPLETE", 'The skin will now be reset', 'To start using your new setup please switch the skin System > Appearance > Skin to the desired one... if images are not showing, just restart Kodi', 'Click OK to Continue')
+        # xbmc.executebuiltin('Mastermode')
+        xbmc.executebuiltin('LoadProfile(Master user)')
+        # xbmc.executebuiltin('Mastermode')
 
 def CreateDir(name, url, action, icon, fanart, description, isFolder=False):
         if icon == None or icon == '': icon = ADDON_ICON
         u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&action="+str(action)+"&name="+urllib.quote_plus(name)+"&icon="+urllib.quote_plus(icon)+"&fanart="+urllib.quote_plus(fanart)+"&description="+urllib.quote_plus(description)
-        ok=True
-        liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=icon)
+        ok = True
+        liz = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=icon)
         liz.setInfo(type="Video", infoLabels={ "Title": name, "Plot": description } )
         liz.setProperty( "Fanart_Image", fanart)
-        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=isFolder)
+        ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=isFolder)
         return ok
 
 def ForceUpdate():
@@ -156,6 +158,10 @@ def ForceUpdate():
     xbmc.executebuiltin("UpdateLocalAddons")
     xbmc.executebuiltin("Dialog.Close(busydialog)")
     xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % (AddonTitle,  'Checking for Updates...' , '5000', ADDON_ICON))
+
+def WizSettings():
+	from resources.lib.modules import control
+	control.openSettings(query='2.0')
 
 from urlparse import parse_qsl
 
@@ -180,58 +186,61 @@ query = params.get('query')
 description = params.get('description')
 content = params.get('content')
 
-if action   == None: CATEGORIES()
-elif action == 'settings': control.openSettings()
-
-elif action == 'fresh_start': 
-	dialog.ok(AddonTitle,'Before Proceeding please switch skin to the default Kodi... Confluence or Estuary...','','')
-	from resources.lib.modules import wiz 
-	wiz.skinswap()
-	FRESHSTART()
-
+if action == None: CATEGORIES()
 elif action == 'builds': BUILDS()
 elif action == 'tools': CAT_TOOLS()
 elif action == 'maintenance': MAINTENANCE()
-
 elif action == 'forceUpdate': ForceUpdate()
+elif action == 'wizSettings': WizSettings()
+elif action == 'settings': control.openSettings()
 
-elif action == 'adv_settings': 
-	from resources.lib.modules import tools
-	tools.advancedSettings()
+elif action == 'adv_settings':
+    from resources.lib.modules import tools
+    tools.advancedSettings()
 
-elif action == 'clear_cache': 
-	from resources.lib.modules import maintenance
-	maintenance.clearCache()
+elif action == 'changeLog':
+    from resources.lib.modules import changelog
+    changelog.get()
 
-elif action == 'log_tools': 
-	from resources.lib.modules import logviewer
-	logviewer.logView()	
+elif action == 'log_tools':
+    from resources.lib.modules import logviewer
+    logviewer.logView()
 
-elif action == 'clear_packages': 
-	from resources.lib.modules import maintenance
-	maintenance.purgePackages()
+elif action == 'clear_cache':
+    from resources.lib.modules import maintenance
+    maintenance.clearCache()
 
-elif action == 'clear_thumbs': 
-	from resources.lib.modules import maintenance
-	maintenance.deleteThumbnails()	
+elif action == 'clear_packages':
+    from resources.lib.modules import maintenance
+    maintenance.purgePackages()
+
+elif action == 'clear_thumbs':
+    from resources.lib.modules import maintenance
+    maintenance.deleteThumbnails()
+
+elif action == 'fresh_start':
+    dialog.ok(AddonTitle,'Before Proceeding please switch skin to the default Kodi... Confluence or Estuary...','','')
+    from resources.lib.modules import wiz
+    wiz.skinswap()
+    FRESHSTART()
 
 elif action == 'backup_restore':
-	from resources.lib.modules import wiz
-	typeOfBackup = ['BACKUP', 'RESTORE']
-	s_type = control.selectDialog(typeOfBackup)
-	if s_type == 0:
-		modes = ['Full Backup', 'Addons Settings']
-		select = control.selectDialog(modes)
-		if select == 0: wiz.backup(mode='full')
-		elif select == 1: wiz.backup(mode='userdata')
-	elif s_type == 1: wiz.restoreFolder()
+    from resources.lib.modules import wiz
+    typeOfBackup = ['BACKUP', 'RESTORE']
+    s_type = control.selectDialog(typeOfBackup)
+    if s_type == 0:
+        modes = ['Full Backup', 'Addons Settings']
+        select = control.selectDialog(modes)
+        if select == 0: wiz.backup(mode='full')
+        elif select == 1: wiz.backup(mode='userdata')
+    elif s_type == 1: wiz.restoreFolder()
 
 elif action == 'install_build':
-	from resources.lib.modules import wiz
-	wiz.skinswap()
-	yesDialog = dialog.yesno(AddonTitle, 'Do you want to perform a Fresh Start before Installing your Build?', yeslabel='Yes', nolabel='No')
-	if yesDialog: FRESHSTART(mode='silent')
-	wiz.buildInstaller(url)
+    from resources.lib.modules import wiz
+    wiz.skinswap()
+    yesDialog = dialog.yesno(AddonTitle, 'Do you want to perform a Fresh Start before Installing your Build?', yeslabel='Yes', nolabel='No')
+    if yesDialog: FRESHSTART(mode='silent')
+    wiz.buildInstaller(url)
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
 

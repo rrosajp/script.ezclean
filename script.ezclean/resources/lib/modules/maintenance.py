@@ -23,7 +23,7 @@ class cacheEntry:
     # entries = 5 #make sure this refelcts the amount of entries you have
     # dialogName = ["WTF", "4oD", "BBC iPlayer", "Simple Downloader", "ITV"]
     # pathName = ["special://profile/addon_data/plugin.video.whatthefurk/cache", "special://profile/addon_data/plugin.video.4od/cache",
-					# "special://profile/addon_data/plugin.video.iplayer/iplayer_http_cache","special://profile/addon_data/script.module.simple.downloader",
+                    # "special://profile/addon_data/plugin.video.iplayer/iplayer_http_cache","special://profile/addon_data/script.module.simple.downloader",
                     # "special://profile/addon_data/plugin.video.itv/Images"]
     # cacheEntries = []
     # for x in range(entries):
@@ -31,7 +31,7 @@ class cacheEntry:
     # return cacheEntries
 
 def clearCache(mode='verbose'):
-    if os.path.exists(cachePath)==True:    
+    if os.path.exists(cachePath)==True:
         for root, dirs, files in os.walk(cachePath):
             file_count = 0
             file_count += len(files)
@@ -49,7 +49,7 @@ def clearCache(mode='verbose'):
                             pass
             else:
                 pass
-    if os.path.exists(tempPath)==True:    
+    if os.path.exists(tempPath)==True:
         for root, dirs, files in os.walk(tempPath):
             file_count = 0
             file_count += len(files)
@@ -93,7 +93,7 @@ def clearCache(mode='verbose'):
     cacheEntries = []
     for entry in cacheEntries:
         clear_cache_path = xbmc.translatePath(entry.path)
-        if os.path.exists(clear_cache_path)==True:    
+        if os.path.exists(clear_cache_path)==True:
             for root, dirs, files in os.walk(clear_cache_path):
                 file_count = 0
                 file_count += len(files)
@@ -104,37 +104,39 @@ def clearCache(mode='verbose'):
                             shutil.rmtree(os.path.join(root, d))
                 else:
                     pass
-    if mode == 'verbose': xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % ('Maintenance' , 'Clean Completed' , '3000', iconpath))    
-    
+    if mode == 'verbose': xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % ('Maintenance' , 'Clean Completed' , '3000', iconpath))
+
 def deleteThumbnails(mode='verbose'):
-    if os.path.exists(thumbnailPath)==True:  
+    if os.path.exists(thumbnailPath)==True:
             # dialog = xbmcgui.Dialog()
             # if dialog.yesno("Delete Thumbnails", "This option deletes all thumbnails", "Are you sure you want to do this?"):
                 for root, dirs, files in os.walk(thumbnailPath):
                     file_count = 0
                     file_count += len(files)
-                    if file_count > 0:                
+                    if file_count > 0:
                         for f in files:
                             try:
                                 os.unlink(os.path.join(root, f))
                             except:
                                 pass
     if os.path.exists(THUMBS):
-		try:	
-			for root, dirs, files in os.walk(THUMBS):
-				file_count = 0
-				file_count += len(files)
-				# Count files and give option to delete
-				if file_count > 0:
-						for f in files:	os.unlink(os.path.join(root, f))
-						for d in dirs: shutil.rmtree(os.path.join(root, d))
-		except:
-			pass
+        try:
+                for root, dirs, files in os.walk(THUMBS):
+                    file_count = 0
+                    file_count += len(files)
+                    # Count files and give option to delete
+                    if file_count > 0:
+                        for f in files:
+                            os.unlink(os.path.join(root, f))
+                        for d in dirs:
+                            shutil.rmtree(os.path.join(root, d))
+        except:
+            pass
     try:
-		text13 = os.path.join(databasePath,"Textures13.db")
-		os.unlink(text13)
+        text13 = os.path.join(databasePath,"Textures13.db")
+        os.unlink(text13)
     except:
-		pass
+        pass
     if mode == 'verbose': xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % ('Maintenance' , 'Clean Thumbs Completed' , '3000', iconpath))
 
 def purgePackages(mode='verbose'):
@@ -143,11 +145,11 @@ def purgePackages(mode='verbose'):
     for root, dirs, files in os.walk(purgePath):
             file_count = 0
             file_count += len(files)
-    # if dialog.yesno("Delete Package Cache Files", "%d packages found."%file_count, "Delete Them?"):  
+    # if dialog.yesno("Delete Package Cache Files", "%d packages found."%file_count, "Delete Them?"):
     for root, dirs, files in os.walk(purgePath):
             file_count = 0
             file_count += len(files)
-            if file_count > 0:            
+            if file_count > 0:
                 for f in files:
                     os.unlink(os.path.join(root, f))
                 for d in dirs:
