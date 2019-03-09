@@ -1,4 +1,4 @@
-(Report any errors or issues @ https://github.com/jewbmx/repo/issues)
+(Report any errors or issues @ https://github.com/jewbmx/script.ezclean/issues)
 (If you'd like to add anything or help out with this addon, fork and pull.)
 
 v1.1
