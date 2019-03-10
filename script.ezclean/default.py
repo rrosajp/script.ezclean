@@ -39,31 +39,61 @@ def ENABLE_WIZARD():
     except:
         pass
 
+def getMenuEnabled(menu_title):
+    is_enabled = control.setting(menu_title).strip()
+    if (is_enabled == '' or is_enabled == 'false'): return False
+    return True
+
 def CATEGORIES():
-    CreateDir('[COLOR white][B]MAINTENANCE[/B][/COLOR]','ur', 'maintenance', ADDON_ICON,ADDON_FANART,'', isFolder=True)
-    CreateDir('[COLOR white][B]LOG VIEWER/UPLOADER[/B][/COLOR]','ur', 'log_tools', ADDON_ICON,ADDON_FANART,'')
-    CreateDir('[COLOR white][B]TOOLS[/B][/COLOR]','ur','tools',ADDON_ICON,ADDON_FANART,'', isFolder=True)
-    CreateDir('[COLOR white][B]SETTINGS[/B][/COLOR]','ur','settings',ADDON_ICON,ADDON_FANART,'')
-    CreateDir('[COLOR white][B]SHOW CHANGELOG[/B][/COLOR]','ur','changeLog',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.maintenance') == True:
+        CreateDir('[COLOR white][B]MAINTENANCE[/B][/COLOR]','ur', 'maintenance', ADDON_ICON,ADDON_FANART,'', isFolder=True)
+    if getMenuEnabled('navi.logviewer') == True:
+        CreateDir('[COLOR white][B]LOG VIEWER/UPLOADER[/B][/COLOR]','ur', 'log_tools', ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.tools') == True:
+        CreateDir('[COLOR white][B]TOOLS[/B][/COLOR]','ur','tools',ADDON_ICON,ADDON_FANART,'', isFolder=True)
+    if getMenuEnabled('navi.settings') == True:
+        CreateDir('[COLOR white][B]SETTINGS[/B][/COLOR]','ur','settings',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.changelog') == True:
+        CreateDir('[COLOR white][B]SHOW CHANGELOG[/B][/COLOR]','ur','changeLog',ADDON_ICON,ADDON_FANART,'')
 
 def CAT_TOOLS():
-    CreateDir('[COLOR white][B]ADVANCED SETTINGS (BUFFER SIZE)[/B][/COLOR]','ur', 'adv_settings', ADDON_ICON,ADDON_FANART,'')
-    CreateDir('[COLOR white][B]FORCE UPDATES[/B][/COLOR]','ur', 'forceUpdate', ADDON_ICON,ADDON_FANART,'')
-    CreateDir('[COLOR white][B]BACKUP/RESTORE[/B][/COLOR]','ur','backup_restore',ADDON_ICON,ADDON_FANART,'')
-    CreateDir('[COLOR white][B]BUILDS/WIZARD[/B][/COLOR]','ur','builds',ADDON_ICON,ADDON_FANART,'', isFolder=True)
-    CreateDir('[COLOR red][B]FRESH START[/B][/COLOR]','url','fresh_start',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.advansett') == True:
+        CreateDir('[COLOR white][B]ADVANCED SETTINGS (BUFFER SIZE)[/B][/COLOR]','ur', 'adv_settings', ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.forcup') == True:
+        CreateDir('[COLOR white][B]FORCE UPDATES[/B][/COLOR]','ur', 'forceUpdate', ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.enadd') == True:
+        CreateDir('[COLOR white][B]ENABLE ADDONS[/B][/COLOR]','ur', 'enableAddons', ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.enunsour') == True:
+        CreateDir('[COLOR white][B]ENABLE UNKNOWN SOURCES[/B][/COLOR]','ur', 'enableUnknownSources', ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.backre') == True:
+        CreateDir('[COLOR white][B]BACKUP/RESTORE[/B][/COLOR]','ur','backup_restore',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.builwiz') == True:
+        CreateDir('[COLOR white][B]BUILDS/WIZARD[/B][/COLOR]','ur','builds',ADDON_ICON,ADDON_FANART,'', isFolder=True)
+    if getMenuEnabled('navi.reloski') == True:
+        CreateDir('[COLOR white][B]RELOAD SKIN[/B][/COLOR]','ur','reloadMySkin',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.relopro') == True:
+        CreateDir('[COLOR white][B]RELOAD PROFILE (MASTER USER)[/B][/COLOR]','ur','reloadUser',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.fresta') == True:
+        CreateDir('[COLOR red][B]FRESH START[/B][/COLOR]','url','fresh_start',ADDON_ICON,ADDON_FANART,'')
 
 def MAINTENANCE():
-    CreateDir('[COLOR white][B]Clear Cache[/B][/COLOR]','url','clear_cache',ADDON_ICON,ADDON_FANART,'')
-    CreateDir('[COLOR white][B]Clear Packages[/B][/COLOR]','url','clear_packages',ADDON_ICON,ADDON_FANART,'')
-    CreateDir('[COLOR white][B]Clear Thumbnails[/B][/COLOR]','url','clear_thumbs',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.clearcache') == True:
+        CreateDir('[COLOR white][B]CLEAR CACHE[/B][/COLOR]','url','clear_cache',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.clearpack') == True:
+        CreateDir('[COLOR white][B]CLEAR PACKAGES[/B][/COLOR]','url','clear_packages',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.clearthumb') == True:
+        CreateDir('[COLOR white][B]CLEAR THUMBNAILS[/B][/COLOR]','url','clear_thumbs',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.clearempfold') == True:
+        CreateDir('[COLOR white][B]CLEAR EMPTY FOLDERS[/B][/COLOR]','url','clearEmptyFolders',ADDON_ICON,ADDON_FANART,'')
+    if getMenuEnabled('navi.clearresolvecache') == True:
+        CreateDir('[COLOR white][B]CLEAR RESOLVERS CACHE[/B][/COLOR]','url','reset_ResolversCache',ADDON_ICON,ADDON_FANART,'')
 
 def OPEN_URL(url):
     r = requests.get(url).content
     return r
 
 def BUILDS():
-    if wizard1 != 'false':
+    if wizard1!= 'false':
         try:
             name = unicode(control.setting('name1'))
             url = unicode(control.setting('url1'))
@@ -71,7 +101,7 @@ def BUILDS():
             fanart = unicode(control.setting('img1'))
             CreateDir('[COLOR lime][B][Wizard][/B][/COLOR] ' + name, url, 'install_build' , img, fanart, 'My custom Build', isFolder=False)
         except: pass
-    if wizard2 != 'false':
+    if wizard2!= 'false':
         try:
             name = unicode(selfAddon.getSetting('name2'))
             url = unicode(selfAddon.getSetting('url2'))
@@ -79,7 +109,7 @@ def BUILDS():
             fanart = unicode(selfAddon.getSetting('img2'))
             CreateDir('[COLOR skyblue][B][Wizard][/B][/COLOR] ' +name, url, 'install_build' , img, fanart, 'My custom Build', isFolder=False)
         except: pass
-    if wizard3 != 'false':
+    if wizard3!= 'false':
         try:
             name = unicode(selfAddon.getSetting('name3'))
             url = unicode(selfAddon.getSetting('url3'))
@@ -90,7 +120,7 @@ def BUILDS():
     CreateDir('[COLOR white][B]WIZARD SETTINGS[/B][/COLOR]','ur','wizSettings',ADDON_ICON,ADDON_FANART,'')
 
 def FRESHSTART(mode='verbose'):
-    if mode != 'silent': select = xbmcgui.Dialog().yesno("EZ Clean", 'Are you absolutely certain you want to wipe this install?', '', 'All addons EXCLUDING THIS WIZARD will be completely wiped!', yeslabel='Yes',nolabel='No')
+    if mode!= 'silent': select = xbmcgui.Dialog().yesno("EZ Clean", 'Are you absolutely certain you want to wipe this install?', '', 'All addons EXCLUDING THIS WIZARD will be completely wiped!', yeslabel='Yes',nolabel='No')
     else: select = 1
     if select == 0: return
     elif select == 1:
@@ -116,9 +146,9 @@ def FRESHSTART(mode='verbose'):
     REMOVE_EMPTY_FOLDERS()
     # RESTOREFAV()
     # ENABLE_WIZARD()
-    if mode != 'silent': dialog.ok(AddonTitle,'Wipe Successful, The interface will now be reset...','','')
+    if mode!= 'silent': dialog.ok(AddonTitle,'Wipe Successful, The interface will now be reset...','','')
     # xbmc.executebuiltin('Mastermode')
-    if mode != 'silent': xbmc.executebuiltin('LoadProfile(Master user)')
+    if mode!= 'silent': xbmc.executebuiltin('LoadProfile(Master user)')
     # xbmc.executebuiltin('Mastermode')
 
 def REMOVE_EMPTY_FOLDERS():
@@ -159,6 +189,9 @@ def ForceUpdate():
     xbmc.executebuiltin("Dialog.Close(busydialog)")
     xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % (AddonTitle,  'Checking for Updates...' , '5000', ADDON_ICON))
 
+def ReloadMySkin():
+	xbmc.executebuiltin("ReloadSkin()")
+
 def WizSettings():
 	from resources.lib.modules import control
 	control.openSettings(query='2.0')
@@ -193,6 +226,16 @@ elif action == 'maintenance': MAINTENANCE()
 elif action == 'forceUpdate': ForceUpdate()
 elif action == 'wizSettings': WizSettings()
 elif action == 'settings': control.openSettings()
+elif action == 'reloadUser': killxbmc()
+elif action == 'reloadMySkin': ReloadMySkin()
+
+elif action == 'enableAddons':
+    from resources.lib.modules import tools
+    tools.ENABLE_ADDONS()
+
+elif action == 'enableUnknownSources':
+    from resources.lib.modules import tools
+    tools.swapUS()
 
 elif action == 'adv_settings':
     from resources.lib.modules import tools
@@ -218,11 +261,21 @@ elif action == 'clear_thumbs':
     from resources.lib.modules import maintenance
     maintenance.deleteThumbnails()
 
+elif action == 'clearEmptyFolders':
+    REMOVE_EMPTY_FOLDERS()
+    xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % (AddonTitle,  'Clearing Empty Folders...' , '5000', ADDON_ICON))
+
+elif action == 'reset_ResolversCache':
+    from resources.lib.modules import tools
+    tools.resetResolversCache()
+
 elif action == 'fresh_start':
-    dialog.ok(AddonTitle,'Before Proceeding please switch skin to the default Kodi... Confluence or Estuary...','','')
-    from resources.lib.modules import wiz
-    wiz.skinswap()
-    FRESHSTART()
+    yesDialog = dialog.yesno(AddonTitle, 'Are you sure you want to perform a Fresh Start?', yeslabel='Yes', nolabel='No')
+    if yesDialog:
+        dialog.ok(AddonTitle,'Before Proceeding please switch skin to the default Kodi... Confluence or Estuary...','','')
+        from resources.lib.modules import wiz
+        wiz.skinswap()
+        FRESHSTART()
 
 elif action == 'backup_restore':
     from resources.lib.modules import wiz

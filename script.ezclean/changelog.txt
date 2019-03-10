@@ -3,6 +3,20 @@
 [B][COLOR yellow] WARNING: Still Testing, May Cause Problems. [/COLOR][/B]
 
 
+[B] v1.4 [/B]
+- Few bugs fixed.
+- Added Hide/Show to settings for Menus.
+(Menu Navigation Customization.)
+- Added a yes/no for Fresh Start option to cancel easier.
+- Added Reload Profile to Tools Menu.
+- Added Enable Unknown Sources in Tools Menu.
+- Added Enable Addons to Tools Menu.
+(Enables all addons with 1 click.)
+- Added Clear Empty Folders to Maintenance Menu.
+(Clears All Empty Folders.)
+- Added Clear Resolvers Cache to Maintenance Menu.
+(Runs the Reset Function Cache for resolveurl and urlresolver.)
+
 [B] v1.3 [/B]
 - Few bugs fixed.
 

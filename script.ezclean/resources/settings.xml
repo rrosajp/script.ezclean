@@ -3,13 +3,41 @@
 
     <category label="Maintenance">
         <setting id="notify_mode" type="bool" label="Show Stats at Startup" default="true" />
-        <setting id="startup.cache" type="bool" label="AutoClean at Startup" default="true" />
+        <setting id="startup.cache" type="bool" label="AutoClean at Startup" default="false" />
         <setting type="sep" />
         <setting type="lsep" label="Package Folder Limits" />
-        <setting id="filesize_alert" type="slider" label="Max Total Files Size (MB)" default="200" range="25,500" option="int" />
+        <setting id="filesize_alert" type="slider" label="Max Total Files Size (MB)" default="250" range="25,500" option="int" />
         <setting id="packagenumbers_alert" type="slider" label="Max Number of Zip Files" default="50" range="5,200" option="int" />
         <setting type="lsep" label="Thumbnails Folder Limits" />
         <setting id="filesizethumb_alert" type="slider" label="Max Total Files Size (MB)" default="500" range="50,2000" option="int" />
+        <setting type="sep" />
+    </category>
+
+    <category label="Hide/Show">
+        <setting type="lsep" label="Main Menu" />
+        <setting id="navi.maintenance" type="bool" label="MAINTENANCE" default="true" />
+        <setting id="navi.logviewer" type="bool" label="LOG VIEWER/UPLOADER" default="true" />
+        <setting id="navi.tools" type="bool" label="TOOLS" default="true" />
+        <setting id="navi.settings" type="bool" label="SETTINGS" default="true" />
+        <setting id="navi.changelog" type="bool" label="CHANGELOG" default="true" />
+        <setting type="sep" />
+        <setting type="lsep" label="Maintenance Menu" />
+        <setting id="navi.clearcache" type="bool" label="CLEAR CACHE" default="true" />
+        <setting id="navi.clearpack" type="bool" label="CLEAR PACKAGES" default="true" />
+        <setting id="navi.clearthumb" type="bool" label="CLEAR THUMBNAILS" default="true" />
+        <setting id="navi.clearempfold" type="bool" label="CLEAR EMPTY FOLDERS" default="true" />
+        <setting id="navi.clearresolvecache" type="bool" label="CLEAR RESOLVERS CACHE" default="true" />
+        <setting type="sep" />
+        <setting type="lsep" label="Tools Menu" />
+        <setting id="navi.advansett" type="bool" label="ADVANCED SETTINGS" default="true" />
+        <setting id="navi.forcup" type="bool" label="FORCE UPDATES" default="true" />
+        <setting id="navi.enadd" type="bool" label="ENABLE ADDONS" default="true" />
+        <setting id="navi.enunsour" type="bool" label="ENABLE UNKNOWN SOURCES" default="true" />
+        <setting id="navi.backre" type="bool" label="BACKUP/RESTORE" default="true" />
+        <setting id="navi.builwiz" type="bool" label="BUILDS/WIZARD" default="true" />
+        <setting id="navi.reloski" type="bool" label="RELOAD SKIN" default="true" />
+        <setting id="navi.relopro" type="bool" label="RELOAD PROFILE" default="true" />
+        <setting id="navi.fresta" type="bool" label="FRESH START" default="true" />
         <setting type="sep" />
     </category>
 
@@ -35,10 +63,6 @@
         <setting id="url3" type="text" label="Zip Url" default="https://" enable="!eq(-2,false)"/>
         <setting id="img3" type="text" label="Image" default="special://home/addons/script.ezclean/fanart.jpg" enable="!eq(-3,false)"/>
         <setting type="sep" />
-    </category>
-
-    <category label="Debug">
-        <setting id="addon_debug" type="bool" label="Enable Debug" default="false" />
     </category>
 
 </settings>

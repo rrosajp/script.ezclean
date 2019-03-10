@@ -8,9 +8,12 @@ from datetime import datetime
 dp = xbmcgui.DialogProgress()
 dialog = xbmcgui.Dialog()
 addonInfo = xbmcaddon.Addon().getAddonInfo
-
+ADDON_ICON = control.addonIcon()
+HOME_ADDONS = xbmc.translatePath('special://home/addons')
+EXCLUDES_ADDONS = ['notification','packages']
 AddonTitle = "EZ Clean"
 AddonID = 'script.ezclean'
+
 
 def xml_data_advSettings_old(size):
     xml_data="""<advancedsettings>
@@ -80,6 +83,10 @@ def _get_keyboard( default="", heading="", hidden=False ):
         return unicode( keyboard.getText(), "utf-8" )
     return default
 
+def resetResolversCache():
+    if xbmc.getCondVisibility('System.HasAddon(script.module.resolveurl)'): xbmc.executebuiltin('RunPlugin(plugin://script.module.resolveurl/?mode=reset_cache)')
+    if xbmc.getCondVisibility('System.HasAddon(script.module.urlresolver)'): xbmc.executebuiltin('RunPlugin(plugin://script.module.urlresolver/?mode=reset_cache)')
+
 def ENABLE_ADDONS():
     for root, dirs, files in os.walk(HOME_ADDONS,topdown=True):
         dirs[:] = [d for d in dirs]
@@ -91,6 +98,7 @@ def ENABLE_ADDONS():
                         xbmc.executeJSONRPC(query)
                     except:
                         pass
+    xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % (AddonTitle,  'Done. All Addons Should Be Enabled.' , '5000', ADDON_ICON))
 
 def FIX_SPECIAL():
     HOME = xbmc.translatePath('special://home')
@@ -105,6 +113,29 @@ def FIX_SPECIAL():
                  f= open((os.path.join(root, file)), mode='w')
                  f.write(str(b))
                  f.close()
+
+def swapUS():
+    new = '"addons.unknownsources"'
+    value = 'true'
+    query = '{"jsonrpc":"2.0", "method":"Settings.GetSettingValue","params":{"setting":%s}, "id":1}' % (new)
+    response = xbmc.executeJSONRPC(query)
+    if 'true' in response:
+        xbmcgui.Dialog().notification("EZ Clean", "Unknown Sources: Already Enabled.")
+    if 'false' in response:
+        #thread.start_new_thread(dialogWatch, ())
+        xbmc.sleep(200)
+        query = '{"jsonrpc":"2.0", "method":"Settings.SetSettingValue","params":{"setting":%s,"value":%s}, "id":1}' % (new, value)
+        response = xbmc.executeJSONRPC(query)
+        xbmcgui.Dialog().notification("EZ Clean", "Unknown Sources: Enabled.")
+
+def dialogWatch():
+    x = 0
+    while not xbmc.getCondVisibility("Window.isVisible(yesnodialog)") and x < 100:
+        x += 1
+        xbmc.sleep(100)
+    if xbmc.getCondVisibility("Window.isVisible(yesnodialog)"):
+        xbmc.executebuiltin('SendClick(11)')
+
 
 def skinswap():
     skin = xbmc.getSkinDir()

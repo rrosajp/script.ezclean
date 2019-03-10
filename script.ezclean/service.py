@@ -19,6 +19,9 @@ total_size2 = 0
 total_size = 0
 count = 0
 
+while xbmc.Player().isPlayingVideo():
+    xbmc.sleep(1000)
+
 for dirpath, dirnames, filenames in os.walk(packagesdir):
     count = 0
     for f in filenames:
@@ -50,5 +53,3 @@ if notify_mode == 'true': xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)
 time.sleep(3)
 if auto_clean  == 'true': maintenance.clearCache()
 
-while xbmc.Player().isPlayingVideo():
-    xbmc.sleep(1000)
