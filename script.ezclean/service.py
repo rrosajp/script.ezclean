@@ -50,3 +50,5 @@ if notify_mode == 'true': xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)
 time.sleep(3)
 if auto_clean  == 'true': maintenance.clearCache()
 
+while xbmc.Player().isPlayingVideo():
+    xbmc.sleep(1000)

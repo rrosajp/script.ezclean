@@ -137,20 +137,20 @@ def REMOVE_EMPTY_FOLDERS():
         except:pass
 
 def killxbmc():
-        dialog.ok("PROCESS COMPLETE", 'The skin will now be reset', 'To start using your new setup please switch the skin System > Appearance > Skin to the desired one... if images are not showing, just restart Kodi', 'Click OK to Continue')
-        # xbmc.executebuiltin('Mastermode')
-        xbmc.executebuiltin('LoadProfile(Master user)')
-        # xbmc.executebuiltin('Mastermode')
+    dialog.ok("PROCESS COMPLETE", 'The skin will now be reset', 'To start using your new setup please switch the skin System > Appearance > Skin to the desired one... if images are not showing, just restart Kodi', 'Click OK to Continue')
+    # xbmc.executebuiltin('Mastermode')
+    xbmc.executebuiltin('LoadProfile(Master user)')
+    # xbmc.executebuiltin('Mastermode')
 
 def CreateDir(name, url, action, icon, fanart, description, isFolder=False):
-        if icon == None or icon == '': icon = ADDON_ICON
-        u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&action="+str(action)+"&name="+urllib.quote_plus(name)+"&icon="+urllib.quote_plus(icon)+"&fanart="+urllib.quote_plus(fanart)+"&description="+urllib.quote_plus(description)
-        ok = True
-        liz = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=icon)
-        liz.setInfo(type="Video", infoLabels={ "Title": name, "Plot": description } )
-        liz.setProperty( "Fanart_Image", fanart)
-        ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=isFolder)
-        return ok
+    if icon == None or icon == '': icon = ADDON_ICON
+    u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&action="+str(action)+"&name="+urllib.quote_plus(name)+"&icon="+urllib.quote_plus(icon)+"&fanart="+urllib.quote_plus(fanart)+"&description="+urllib.quote_plus(description)
+    ok = True
+    liz = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=icon)
+    liz.setInfo(type="Video", infoLabels={ "Title": name, "Plot": description } )
+    liz.setProperty( "Fanart_Image", fanart)
+    ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=isFolder)
+    return ok
 
 def ForceUpdate():
     xbmc.executebuiltin("ActivateWindow(busydialog)")

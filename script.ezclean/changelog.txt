@@ -2,6 +2,10 @@
 (If you'd like to add anything or help out with this addon, fork and pull.)
 [B][COLOR yellow] WARNING: Still Testing, May Cause Problems. [/COLOR][/B]
 
+
+[B] v1.3 [/B]
+- Few bugs fixed.
+
 [B] v1.2 [/B]
 - Full Dent Check and fix.
 - Added Show Changelog.
