@@ -5,6 +5,7 @@ import xbmc,xbmcaddon,xbmcgui,xbmcplugin,xbmcvfs
 from resources.lib.modules import maintenance
 
 AddonID = 'script.ezclean'
+AddonTitle = "EZ Clean"
 packagesdir = xbmc.translatePath(os.path.join('special://home/addons/packages',''))
 thumbnails = xbmc.translatePath('special://home/userdata/Thumbnails')
 dialog = xbmcgui.Dialog()
@@ -31,7 +32,7 @@ for dirpath, dirnames, filenames in os.walk(packagesdir):
 total_sizetext = "%.0f" % (total_size/1024000.0)
 
 if int(total_sizetext) > filesize:
-    choice2 = xbmcgui.Dialog().yesno("[COLOR=red]Autocleaner[/COLOR]", 'The packages folder is [COLOR red]' + str(total_sizetext) +' MB [/COLOR] - [COLOR red]' + str(count) + '[/COLOR] zip files', 'The folder can be cleaned up without issues to save space...', 'Do you want to clean it now?', yeslabel='Yes',nolabel='No')
+    choice2 = xbmcgui.Dialog().yesno(AddonTitle, 'The packages folder is [COLOR red]' + str(total_sizetext) +' MB [/COLOR] - [COLOR red]' + str(count) + '[/COLOR] zip files', 'The folder can be cleaned up without issues to save space...', 'Do you want to clean it now?', yeslabel='Yes',nolabel='No')
     if choice2 == 1:
         maintenance.purgePackages()
 
@@ -42,14 +43,14 @@ for dirpath2, dirnames2, filenames2 in os.walk(thumbnails):
 total_sizetext2 = "%.0f" % (total_size2/1024000.0)
 
 if int(total_sizetext2) > filesize_thumb:
-    choice2 = xbmcgui.Dialog().yesno("[COLOR=red]Autocleaner[/COLOR]", 'The images folder is [COLOR red]' + str(total_sizetext2) + ' MB   [/COLOR]', 'The folder can be cleaned up without issues to save space...', 'Do you want to clean it now?', yeslabel='Yes',nolabel='No')
+    choice2 = xbmcgui.Dialog().yesno(AddonTitle, 'The images folder is [COLOR red]' + str(total_sizetext2) + ' MB   [/COLOR]', 'The folder can be cleaned up without issues to save space...', 'Do you want to clean it now?', yeslabel='Yes',nolabel='No')
     if choice2 == 1:
         maintenance.deleteThumbnails()
 
 total_sizetext = "%.0f" % (total_size/1024000.0)
 total_sizetext2 = "%.0f" % (total_size2/1024000.0)
 
-if notify_mode == 'true': xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % ('Maintenance Status',  'Packages: '+ str(total_sizetext) +  ' MB'  ' - Images: ' + str(total_sizetext2) + ' MB' , '5000', iconpath))
+if notify_mode == 'true': xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % (AddonTitle,  'Packages: '+ str(total_sizetext) +  ' MB'  ' - Images: ' + str(total_sizetext2) + ' MB' , '5000', iconpath))
 time.sleep(3)
 if auto_clean  == 'true': maintenance.clearCache()
 

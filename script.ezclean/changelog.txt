@@ -2,6 +2,13 @@
 (If you'd like to add anything or help out with this addon, fork and pull.)
 [B][COLOR yellow] WARNING: Still Testing, May Cause Problems. [/COLOR][/B]
 
+[B] v1.5 [/B]
+- Added Clear Advanced Settings in Tools Menu.
+- Added a bunch of Notifications for different options and steps.
+- Changed and/or Updated a bunch of Notifications code also.
+- Removed hard coded Color so kodi skin colors can be used.
+- Started Adding Language files so it isnt hard coded english.
+(Will continue later.)
 
 [B] v1.4 [/B]
 - Few bugs fixed.

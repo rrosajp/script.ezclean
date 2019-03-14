@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
 
-    <category label="Maintenance">
-        <setting id="notify_mode" type="bool" label="Show Stats at Startup" default="true" />
-        <setting id="startup.cache" type="bool" label="AutoClean at Startup" default="false" />
+    <category label="40001">
+        <setting id="notify_mode" type="bool" label="40005" default="true" />
         <setting type="sep" />
-        <setting type="lsep" label="Package Folder Limits" />
-        <setting id="filesize_alert" type="slider" label="Max Total Files Size (MB)" default="250" range="25,500" option="int" />
-        <setting id="packagenumbers_alert" type="slider" label="Max Number of Zip Files" default="50" range="5,200" option="int" />
-        <setting type="lsep" label="Thumbnails Folder Limits" />
-        <setting id="filesizethumb_alert" type="slider" label="Max Total Files Size (MB)" default="500" range="50,2000" option="int" />
+        <setting id="startup.cache " type="bool" label="40006" default="false" />
+        <setting type="sep" />
+        <setting type="lsep" label="40007" />
+        <setting id="filesize_alert" type="slider" label="40008" default="250" range="25,500" option="int" />
+        <setting id="packagenumbers_alert" type="slider" label="40009" default="50" range="5,200" option="int" />
+        <setting type="lsep" label="40010" />
+        <setting id="filesizethumb_alert" type="slider" label="40011" default="500" range="50,2000" option="int" />
         <setting type="sep" />
     </category>
 
-    <category label="Hide/Show">
+    <category label="40002">
         <setting type="lsep" label="Main Menu" />
         <setting id="navi.maintenance" type="bool" label="MAINTENANCE" default="true" />
         <setting id="navi.logviewer" type="bool" label="LOG VIEWER/UPLOADER" default="true" />
@@ -22,6 +23,7 @@
         <setting id="navi.changelog" type="bool" label="CHANGELOG" default="true" />
         <setting type="sep" />
         <setting type="lsep" label="Maintenance Menu" />
+        <setting id="navi.clearemall" type="bool" label="CLEAR ALL" default="true" />
         <setting id="navi.clearcache" type="bool" label="CLEAR CACHE" default="true" />
         <setting id="navi.clearpack" type="bool" label="CLEAR PACKAGES" default="true" />
         <setting id="navi.clearthumb" type="bool" label="CLEAR THUMBNAILS" default="true" />
@@ -41,13 +43,13 @@
         <setting type="sep" />
     </category>
 
-    <category label="Backup/Resore">
+    <category label="40003">
         <setting id="download.path" type="folder" label="Backup Location" visible="True" />
         <setting type="sep" />
         <setting id="restore.path" type="folder" label="Restore from Zip Location (folder)" visible="True" />
     </category>
 
-    <category label="Wizard Creator">
+    <category label="40004">
         <setting id="enable_wiz1" type="bool" label="Enable wizard" default="false"/>
         <setting id="name1" type="text" label="Name" default="name" enable="!eq(-1,false)"/>
         <setting id="url1" type="text" label="Zip Url" default="zip url" enable="!eq(-2,false)"/>

@@ -72,6 +72,17 @@ def advancedSettings():
             f.write(xml_data)
             dialog.ok(AddonTitle,'Buffer Size Set to: ' + str(BUFFERSIZE),'Please restart Kodi for settings to apply.','')
 
+def clearAdvancedSettings():
+    dialog = xbmcgui.Dialog()
+    ADVSETTINGSFILE     = xbmc.translatePath(os.path.join('special://home/userdata' , 'advancedsettings.xml'))
+    try:
+        os.remove(ADVSETTINGSFILE)
+    except:
+        dialog.ok(AddonTitle, "Error",'Unable to remove the advancedsettings.xml file.','Might not have one yet.')
+        sys.exit(0)
+    dialog.ok(AddonTitle, "Success",'The advancedsettings.xml has been removed.')
+    #xbmc.executebuiltin("Container.Refresh")
+
 def open_Settings():
     open_Settings = xbmcaddon.Addon(id=AddonID).openSettings()
 
@@ -302,6 +313,8 @@ def _pbhook(numblocks, blocksize, filesize, dp, start_time):
         except:
             percent = 100
             dp.update(percent)
+            dp.close()
+            return
         if dp.iscanceled():
             raise Exception("Canceled")
             dp.close()
