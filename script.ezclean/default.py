@@ -197,7 +197,7 @@ def ReloadMySkin():
 
 def WizSettings():
 	from resources.lib.modules import control
-	control.openSettings(query='2.0')
+	control.openSettings(query='3.0')
 
 from urlparse import parse_qsl
 
