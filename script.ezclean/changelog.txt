@@ -2,6 +2,12 @@
 (If you'd like to add anything or help out with this addon, fork and pull.)
 [B][COLOR yellow] WARNING: Still Testing, May Cause Problems. [/COLOR][/B]
 
+[B] v1.6 [/B]
+- Total Revamp.
+- Too much changed to list lol.
+(Everything still needs tested some more.)
+(Errors are likely as i might of missed a few things.)
+
 [B] v1.5 [/B]
 - Added Clear Advanced Settings in Tools Menu.
 - Added a bunch of Notifications for different options and steps.
