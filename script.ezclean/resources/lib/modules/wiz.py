@@ -359,10 +359,10 @@ def backup(mode='full'):
             exclude_database = ['Textures13.db', '.DS_Store', 'advancedsettings.xml', 'Thumbs.db', '.gitignore']
             try:
                 maintenance.clearCache(mode='silent')
-                maintenance.deleteThumbnails(mode='silent')
-                maintenance.purgePackages(mode='silent')
+                #maintenance.deleteThumbnails(mode='silent')
+                #maintenance.purgePackages(mode='silent')
             except: pass
-            exclude_dirs = ['cache', 'system', 'Thumbnails', 'peripheral_data', 'temp', 'My_Builds', 'keymaps', 'cdm']
+            exclude_dirs = ['.git','.idea','packages','backupdir','cache', 'system', 'Thumbnails', 'peripheral_data', 'temp', 'My_Builds', 'keymaps', 'cdm']
             CreateZip(BACKUPDATA, backup_zip, 'Creating Backup', 'Backing up files', exclude_dirs, exclude_database)
             dialog.ok(AddonTitle, 'Backup complete', '', '')
         else:
